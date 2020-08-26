@@ -13,16 +13,16 @@
 	$(function() {
 		$('#deleteMeOk').on('click', function() { //삭제 컨트롤러로
 			//var param = 'idx='+num
-		var param = 'idx='+num+'&pw='+$('#deletemepw').val();
+			var param = 'idx=' + num + '&pw=' + $('#deletemepw').val();
 			$.ajax('deleteme.bit', {
 				'method' : 'post',
 				'data' : param,
 				'success' : function(data) { //여기서 data는 controller에서 받은 결과
-					var result=$(data).find('result').text();
-					if(result==1){
+					var result = $(data).find('result').text();
+					if (result == 1) {
 						alert('회원정보가 삭제되었습니다')
 						location.href = 'logout.bit';
-					}else{
+					} else {
 						alert('비밀번호를 확인해주세요');
 					}
 				},//success
@@ -31,7 +31,6 @@
 				}//error
 			});//ajax
 		});//click
-
 	});//ready
 </script>
 <style type="text/css">
@@ -46,7 +45,16 @@
 	margin-bottom: 400px;
 }
 
-#accountback{ /* 뒤로 */
+#chkmsg {
+	border-collapse: collapse;
+	padding: 30px;
+}
+
+.pwchk {
+	padding-bottom: 10px;
+}
+
+#accountback { /* 뒤로 */
 	float: right;
 	background-color: #000069;
 	border: 1px solid #000069;
@@ -56,7 +64,7 @@
 	height: 20px;
 }
 
-#deleteMeOk{ /* 탈퇴 */
+#deleteMeOk { /* 탈퇴 */
 	float: right;
 	background-color: #d90b0b;
 	border: 1px solid #d90b0b;
@@ -66,19 +74,17 @@
 	height: 20px;
 }
 
-#deleteMeOk:hover{
+#deleteMeOk:hover {
 	background-color: white;
 	color: #d90b0b;
 	cursor: pointer;
 }
 
-#accountback:hover{
+#accountback:hover {
 	background-color: white;
 	color: #000069;
 	cursor: pointer;
 }
-
-
 
 #pwchk { /*비밀번호 input  */
 	width: 300px;
@@ -120,21 +126,21 @@
 			<div class="lmscontent">
 				<h2>계정관리</h2>
 				<h4>회원탈퇴</h4>
-				<br/>
-
 
 				<c:set value="${bean }" var="bean" />
-				<table id="chkmsg">
+				<div id="chkmsg">
 					<div class="pwchk">비밀번호를 입력해주세요</div>
-<!-- 					<div class="deletemsg">탈퇴 후 삭제된 정보는 복구할 수 없습니다.</div> -->
-					<div><input type="password" name="deletemepw" id="deletemepw" /></div>
-				</table>
+					<!-- 					<div class="deletemsg">탈퇴 후 삭제된 정보는 복구할 수 없습니다.</div> -->
+					<div>
+						<input type="password" name="deletemepw" id="deletemepw" />
+					</div>
+				</div>
 
 
 			</div>
 			<div class="lmscontent">
-				<button id="deleteMeOk" type="submit">탈퇴</button>
 				<button id="accountback" onclick="window.history.go(-1)">뒤로</button>
+				<button id="deleteMeOk" type="submit">탈퇴</button>
 			</div>
 			<!--*************content end******************-->
 			<%@ include file="template/footer.jspf"%>
